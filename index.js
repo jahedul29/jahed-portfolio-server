@@ -24,10 +24,37 @@ app.get("/", (req, res) => {
 
 // Connecting to database
 client.connect((err) => {
-  const collection = client.db(process.env.DB_NAME).collection("admindetails");
   console.log("Database connection established");
-  console.log(process.env.DB_USER);
-  client.close();
+
+  // admin details collection processes
+  const adminDetailsCollection = client
+    .db(process.env.DB_NAME)
+    .collection("admindetails");
+
+  app.get("/getAdmin", (req, res) => {
+    adminDetailsCollection.find({}).toArray((err, docs) => {
+      if (docs.length) {
+        res.status(200).send(docs[0]);
+      } else {
+        res.sendStatus(400);
+      }
+    });
+  });
+
+  // messages collection processes
+  const messagesCollection = client
+    .db(process.env.DB_NAME)
+    .collection("messages");
+
+  app.post("/sendMessage", (req, res) => {
+    messagesCollection.insertOne(req.body).then((result) => {
+      if (result.insertedCount > 0) {
+        res.status(200).send(result.insertedCount > 0);
+      } else {
+        res.sendStatus(404);
+      }
+    });
+  });
 });
 
 app.listen(port, () => {
