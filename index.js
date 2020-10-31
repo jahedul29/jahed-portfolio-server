@@ -22,53 +22,6 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-// const projects = [
-//   {
-//     name: "Agency",
-//     photo: "https://i.imgur.com/8bwLYpk.png",
-//     description:
-//       "This is a software service selling website. User can buy listed services by logging into it. User can log in with gmail are registering with a manual email. Admin and User authorization implemented",
-//     technologies: "React, Node, Firebase",
-//     github: "https://github.com/jahedul29/agency-client",
-//     website: "https://agency-jahed.web.app/",
-//     video: "https://youtu.be/JnmamCxkXio",
-//     status: "Pending",
-//   },
-//   {
-//     name: "Volunteer Network",
-//     photo: "https://i.imgur.com/tDks9aq.png",
-//     description:
-//       "This is a Social Working Platform. User can register any social service by logging into it. User can log in with gmail are registering with a manual email",
-//     technologies: "React, Node, Firebase",
-//     github: "https://github.com/jahedul29/volunteer-network-client",
-//     website: "https://volunteer-network-jahed.web.app",
-//     video: "https://www.youtube.com/watch?v=Kxvl0ggq_7w&feature=youtu.be",
-//     status: "Pending",
-//   },
-//   {
-//     name: "Hotel Searching App",
-//     photo: "https://i.imgur.com/gfDmhSk.png",
-//     description:
-//       "This is a Hotel Searching App used to search hotels of selected places. User needs to login to the website by google or registering with manual email. User must need to confirm email before login and can change password.",
-//     technologies: "React, Firebase, Swiper.js",
-//     github: "github.com/jahedul29/travel-guru",
-//     website: "travel-guru-jahed.web.app",
-//     video: "",
-//     status: "Pending",
-//   },
-//   {
-//     name: "Hot Onion",
-//     photo: "https://i.imgur.com/KALZo0N.png",
-//     description:
-//       "This is restaurant app. User can order their desired food through this app. A complete shopping cart functionality implemented User needs to login to the website by registering with manual email. ",
-//     technologies: "React, Firebase, Swiper.js",
-//     github: "https://github.com/jahedul29/hot-onion",
-//     website: "https://hot-onion-83648.web.app/",
-//     video: "",
-//     status: "Pending",
-//   },
-// ];
-
 // Connecting to database
 client.connect((err) => {
   console.log("Database connection established");
