@@ -16,7 +16,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(fieUpload());
 
-const port = process.env.PORT || 5000;
+// const port = process.env.PORT || 5000;
+const port = 5000;
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -62,11 +63,49 @@ client.connect((err) => {
     .collection("projects");
 
   app.get("/getProjects", (req, res) => {
-    projectsCollection.find({}).toArray((err, projects) => {
+    const filterObject = {};
+
+    req.query.status && (filterObject.status = req.query.status);
+    req.query.category && (filterObject.category = req.query.category);
+
+    projectsCollection.find(filterObject).toArray((err, projects) => {
       if (projects.length) {
         res.status(200).send(projects);
       } else {
         res.sendStatus(404);
+      }
+    });
+  });
+
+  app.post("/addProject", (req, res) => {
+    projectsCollection.insertOne(req.body).then((result) => {
+      if (result.insertedCount > 0) {
+        res.status(200).send(result.insertedCount > 0);
+      } else {
+        result.sendStatus(400);
+      }
+    });
+  });
+
+  // Blogs collection processes
+  const blogsCollection = client.db(process.env.DB_NAME).collection("blogs");
+  app.post("/addBlog", (req, res) => {
+    // console.log(req.body);
+    blogsCollection.insertOne(req.body).then((result) => {
+      if (result.insertedCount > 0) {
+        res.status(200).send(result.insertedCount > 0);
+      } else {
+        res.sendStatus(404);
+      }
+    });
+  });
+
+  app.get("/getBlogs", (req, res) => {
+    blogsCollection.find({}).toArray((err, docs) => {
+      if (docs.length > 0) {
+        res.status(200).send(docs);
+      } else {
+        res.sendStatus(400);
       }
     });
   });
