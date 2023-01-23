@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 
 // Connecting to database
 client.connect((err) => {
-  console.log("Database connection established");
+  console.log("Database connection established done");
 
   // admin details collection processes
   const adminDetailsCollection = client
