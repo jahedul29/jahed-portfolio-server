@@ -68,7 +68,7 @@ client.connect((err) => {
     req.query.category && (filterObject.category = req.query.category);
 
     projectsCollection.find(filterObject).toArray((err, projects) => {
-      if (projects.length) {
+      if (projects?.length) {
         res.status(200).send(projects);
       } else {
         res.sendStatus(404);
@@ -101,7 +101,7 @@ client.connect((err) => {
 
   app.get("/getBlogs", (req, res) => {
     blogsCollection.find({}).toArray((err, docs) => {
-      if (docs.length > 0) {
+      if (docs?.length > 0) {
         res.status(200).send(docs);
       } else {
         res.sendStatus(400);
